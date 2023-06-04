@@ -23,7 +23,7 @@
       var selectValue = document.getElementById('select-channel').value;
 
       var url = 'https://telegram-mozao-api.onrender.com/telegram';
-      var queryParams = '?text=' + encodeURIComponent(inputText) + '&channel_id=' + encodeURIComponent(selectValue);
+      var queryParams = '?text=' + encodeURIComponent(inputText) + '&chat_id=' + encodeURIComponent(selectValue);
 
       var request = new XMLHttpRequest();
       request.open('GET', url + queryParams, true);

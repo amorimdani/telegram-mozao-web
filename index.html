@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo de Requisição GET</title>
+  <style>
+    body {
+      background-image: url('https://images8.alphacoders.com/128/1281259.jpg');
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="result" style="text-align: center;"></div>
+  
+  <script>
+    function makeRequest() {
+      var inputText = document.getElementById('text-input').value;
+      var selectValue = document.getElementById('select-channel').value;
+
+      var url = 'https://telegram-mozao-api.onrender.com/telegram';
+      var queryParams = '?text=' + encodeURIComponent(inputText) + '&channel_id=' + encodeURIComponent(selectValue);
+
+      var request = new XMLHttpRequest();
+      request.open('GET', url + queryParams, true);
+      request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+          var response = JSON.parse(request.responseText);
+          document.getElementById('result').innerText = response.block;
+        } else {
+          console.error('Erro ao fazer a requisição: ' + request.status);
+        }
+      };
+      request.onerror = function() {
+        console.error('Erro de conexão');
+      };
+      request.send();
+    }
+  </script>
+
+  <input type="text" id="text-input" style="display: block; margin: 0 auto;">
+  <select id="select-channel" style="display: block; margin: 10px auto;">
+    <option value="94324040">mozão</option>
+    <option value="-1001621314559">canal dani</option>
+    <option value="1542038952">daninha</option>
+  </select>
+  <button onclick="makeRequest()" style="display: block; margin: 10px auto;">Enviar</button>
+</body>
+</html>
